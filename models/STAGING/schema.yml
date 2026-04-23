@@ -1,0 +1,35 @@
+version: 2
+
+sources:
+  - name: bigquery_source
+    schema: staging
+    tables:
+      - name: orders
+        description: "Raw orders data loaded into BigQuery"
+
+models:
+  - name: stg_orders
+    description: "Cleaned and renamed orders from the raw source. Materialized as a view."
+    columns:
+      - name: order_id
+        description: "Primary key — unique order identifier"
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        description: "ID of the customer who placed the order"
+        tests:
+          - not_null
+      - name: unit_price
+        description: "Price per unit (renamed from 'price' in source)"
+        tests:
+          - not_null
+      - name: payment_mode
+        description: "Payment method used — uppercased"
+        tests:
+        - accepted_values:
+            arguments: ['UPI', 'CARD', 'CASH']
+      - name: order_date
+        description: "Date the order was placed"
+        tests:
+          - not_null

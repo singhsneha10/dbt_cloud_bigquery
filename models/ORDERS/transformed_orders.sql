@@ -1,16 +1,7 @@
+{{ config(materialized='table', alias='orders_rpt') }}
+
 WITH orders AS (
-    SELECT 
-        order_id,
-        customer_id,
-        product_name,
-        category,
-        order_date,
-        quantity,
-        price          AS unit_price,   -- rename here
-        total_amount,
-        city,
-        payment_mode
-    FROM {{ source('bigquery_source', 'orders') }}
+    SELECT * FROM {{ ref('stg_orders') }}
 )
 
 SELECT
