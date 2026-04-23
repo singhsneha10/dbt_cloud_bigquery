@@ -1,24 +1,21 @@
 version: 2
 
-sources:
-  - name: bigquery_source
-    schema: staging
-
-    tables:
-        - name: orders
-
-
 models:
-    - name: transformed_orders
-      description: "Orders transformed table"
-      columns:
-          - name: order_id
-            description: "The primary key for this table"
-            tests:
-                - unique
-                - not_null
-
-      config:
-        materialized: table
-        alias: orders_rpt
-              
+  - name: transformed_orders
+    description: "Final orders mart with business classification columns — revenue tier, price segment, city tier, etc."
+    columns:
+      - name: order_id
+        description: "Primary key"
+        tests:
+          - unique
+          - not_null
+      - name: revenue_tier
+        description: "Order classified as premium / high / medium / low by total_amount"
+      - name: price_segment
+        description: "Product classified as luxury / mid-range / budget by unit_price"
+      - name: order_size
+        description: "bulk (3+), multi (2), or single (1) item order"
+      - name: city_tier
+        description: "Indian metro tier classification of the city"
+      - name: payment_type
+        description: "Digital (UPI/CARD) or Physical (Cash)"
