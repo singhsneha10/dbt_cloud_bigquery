@@ -32,6 +32,3 @@ INSERT INTO <dataset_name>.orders VALUES
 (18, 118, 'Perfume', 'Accessories', '2026-04-18', 1, 2500, 2500, 'Pune', 'Cash'),
 (19, 119, 'Speaker', 'Electronics', '2026-04-19', 1, 5000, 5000, 'Chennai', 'Card'),
 (20, 120, 'Cap', 'Fashion', '2026-04-20', 2, 600, 1200, 'Hyderabad', 'UPI');
-
-
-transform this data for dbt model
